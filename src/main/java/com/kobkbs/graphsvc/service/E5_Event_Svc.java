@@ -1,0 +1,25 @@
+package com.kobkbs.graphsvc.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.kobkbs.graphsvc.model.E5_Event;
+
+public interface E5_Event_Svc {
+
+  List<E5_Event> getAllE5();
+  List<E5_Event> getE5ByLocationName(String placeName);
+  List<E5_Event> getE5ByParticipantPersonName(String personName);
+  List<E5_Event> getE5ByParticipantGroupName(String groupName);
+  E5_Event getE5ByName(String eventName);
+  Optional<E5_Event> getE5ById(String eventId);
+  void createE5(String eventName);
+  void createP7(String eventId, String placeId);
+  void createP11P(String eventId, String personId);
+  void createP11G(String eventId, String groupId);
+  void updateE5Name(String eventId, String newName);
+  void deleteE5ById(String eventId);
+  void deleteP7(String eventId, String placeId);
+  void deleteP11P(String eventId, String personId);
+  void deleteP11G(String eventId, String groupId);
+}
