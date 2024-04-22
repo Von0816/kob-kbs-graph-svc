@@ -22,6 +22,6 @@ public class E74_Group {
   @Id @GeneratedValue(generatorClass = UUIDStringGenerator.class) private String id;
   private String name;
 
-  @Relationship(type = "P107_has_current_or_former_member")
+  @Relationship(type = "P107_HAS_CURRENT_OR_FORMER_MEMBER")
   private Set<E21_Person> member;
 }

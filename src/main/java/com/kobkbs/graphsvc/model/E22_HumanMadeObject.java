@@ -23,15 +23,15 @@ public class E22_HumanMadeObject {
   private String name;
   private String type;
  
-  @Relationship(type = "P54_has_current_permanent_location")
+  @Relationship(type = "P54_HAS_CURRENT_PERMANENT_LOCATION")
   private Set<E53_Place> currPermaLoc;
 
-  @Relationship(type = "P55_has_current_location")
+  @Relationship(type = "P55_HAS_CURRENT_LOCATION")
   private Set<E53_Place> currLoc;
 
-  @Relationship(type = "P51_has_former_or_current_owner")
+  @Relationship(type = "P51_HAS_FORMER_OR_CURRENT_OWNER")
   private Set<E21_Person> ownerPerson;
 
-  @Relationship(type = "P51_has_former_or_current_owner")
+  @Relationship(type = "P51_HAS_FORMER_OR_CURRENT_OWNER")
   private Set<E74_Group> ownerGroup;
 }

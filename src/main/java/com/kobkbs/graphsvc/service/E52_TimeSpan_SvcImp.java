@@ -1,13 +1,15 @@
 package com.kobkbs.graphsvc.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.auditing.CurrentDateTimeProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.kobkbs.graphsvc.dto.E52_TimeSpan_DTO;
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
 import com.kobkbs.graphsvc.repository.E52_TimeSpan_Repo;
 
@@ -25,7 +27,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   @Override
   public List<E52_TimeSpan> getAllE52() {
 
-    return timeSpanRepo.findAll();
+    return timeSpanRepo.findAllE52();
   }
 
   @Override
@@ -35,30 +37,54 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   }
 
   @Override
-  public E52_TimeSpan getE52ByDateTime(LocalDateTime dateTime) {
+  public E52_TimeSpan getE52ByDate(LocalDate dateTime) {
 
-    return timeSpanRepo.findE52ByDateTime(dateTime);
+    return timeSpanRepo.findE52ByDate(dateTime);
   }
 
   @Override
-  public List<E52_TimeSpan> getE52ByFallsWithin(LocalDateTime fallsWithinDT) {
+  public List<E52_TimeSpan> getE52ByFallsWithin(LocalDate fallsWithinDate) {
 
-    return timeSpanRepo.findE52ByFallsWithin(fallsWithinDT);
+    return timeSpanRepo.findE52ByFallsWithin(fallsWithinDate);
   }
 
   @Override
-  public void createE52(LocalDateTime dateTime) {
-    timeSpanRepo.save(E52_TimeSpan.builder().date_time(dateTime).build());
+  public List<E52_TimeSpan> getE52ByYear(String year) {
+
+    return timeSpanRepo.findE52ByYear(year);
   }
 
   @Override
-  public void updateE52DateTime(String timeSpanId, LocalDateTime newDateTime) {
+  public List<E52_TimeSpan> getE52ByMonth(int month) {
+
+    return timeSpanRepo.findE52ByMonth(month);
+  }
+
+  @Override
+  public void createE52(E52_TimeSpan_DTO timeSpanDTO) {
+      E52_TimeSpan timeSpan =  E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).build();
+      timeSpanRepo.createE52Decade(timeSpan.getId(), timeSpan.getYear());
+    // else if(timeSpanDTO.month() < 0 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 0 || timeSpanDTO.day() > 31) {
+    //   throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
+    // }
+    // else {
+    //   timeSpanRepo.save(E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).month(timeSpanDTO.month()).day(timeSpanDTO.day()).build());
+    // }
+  }
+
+  @Override
+  public void updateE52Date(String timeSpanId, E52_TimeSpan_DTO timeSpanDTO) {
 
     if(timeSpanRepo.findById(timeSpanId).isPresent()) {
-      timeSpanRepo.updateE52DateTime(timeSpanId, newDateTime);
+      if(timeSpanDTO.month() < 1 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 1 || timeSpanDTO.day() > 31) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
+      }
+      else {
+      timeSpanRepo.updateE52Date(timeSpanId, timeSpanDTO.type(), timeSpanDTO.year(), timeSpanDTO.month(), timeSpanDTO.day());
+      }
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Time Span Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Time-span does not exist.");
     }
   }
 
@@ -66,7 +92,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   public void createP86(String childTSID, String parentTSID) {
 
     if(timeSpanRepo.findById(childTSID).isEmpty() || timeSpanRepo.findById(parentTSID).isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Time Span Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Time-span does not exist.");
     }
     else {
       timeSpanRepo.createP86(childTSID, parentTSID);
@@ -82,7 +108,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   public void deleteP86(String childTSID, String parentTSID) {
 
     if(timeSpanRepo.findP86(childTSID, parentTSID).isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Relationship Not Found");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Relationship not found");
     }
     else {
       timeSpanRepo.deleteP86(childTSID, parentTSID);

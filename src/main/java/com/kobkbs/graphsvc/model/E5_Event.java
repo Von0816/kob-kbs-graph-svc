@@ -22,15 +22,15 @@ public class E5_Event {
   @Id @GeneratedValue(generatorClass = UUIDStringGenerator.class) private String id;
   private String name;
 
-  @Relationship(type = "P7_took_place_at")
+  @Relationship(type = "P7_TOOK_PLACE_AT")
   private Set<E53_Place> location;
   
-  @Relationship(type = "P11_had_participant")
+  @Relationship(type = "P11_HAD_PARTICIPANT")
   private Set<E21_Person> participantPerson;
 
-  @Relationship(type = "P11_had_participant")
+  @Relationship(type = "P11_HAD_PARTICIPANT")
   private Set<E74_Group> participantGroup;
 
-  @Relationship(type = "P4_has_time_span")
+  @Relationship(type = "P4_HAS_TIME_SPAN")
   private Set<E52_TimeSpan> timeSpan;
 }

@@ -1,6 +1,6 @@
 package com.kobkbs.graphsvc.api;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kobkbs.graphsvc.dto.E52_TimeSpan_DTO;
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
 import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/e52_time_span")
+@RequestMapping("/e52_time-span")
 @RequiredArgsConstructor
 public class E52_TimeSpan_API {
 
@@ -39,22 +40,34 @@ public class E52_TimeSpan_API {
     return timeSpanSvc.getE52ById(timeSpanId);
   }
 
-  @GetMapping("/date_time/{dateTime}")
-  public E52_TimeSpan GetE52ByDateTime(@PathVariable LocalDateTime dateTime) {
+  @GetMapping("/year/{year}")
+  public List<E52_TimeSpan> GetE52ByYear(@PathVariable String year) {
 
-    return timeSpanSvc.getE52ByDateTime(dateTime);
+    return timeSpanSvc.getE52ByYear(year);
+  }
+
+  @GetMapping("/month/{month}")
+  public List<E52_TimeSpan> GetE52ByMonth(@PathVariable int month) {
+
+    return timeSpanSvc.getE52ByMonth(month);
+  }
+
+  @GetMapping("/date_time/{dateTime}")
+  public E52_TimeSpan GetE52ByDate(@PathVariable LocalDate dateTime) {
+
+    return timeSpanSvc.getE52ByDate(dateTime);
   }
 
   @GetMapping("/p86/{fallsWithinDT}")
-  public List<E52_TimeSpan> GetE52ByFallsWithin(@PathVariable LocalDateTime fallsWithinDT) {
+  public List<E52_TimeSpan> GetE52ByFallsWithin(@PathVariable LocalDate fallsWithinDT) {
 
     return timeSpanSvc.getE52ByFallsWithin(fallsWithinDT);
   }
 
   @PostMapping
-  public ResponseEntity<String> CreateE52(@RequestBody LocalDateTime dateTime) {
+  public ResponseEntity<String> CreateE52(@RequestBody E52_TimeSpan_DTO timeSpanDTO) {
 
-    timeSpanSvc.createE52(dateTime);
+    timeSpanSvc.createE52(timeSpanDTO);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
@@ -68,9 +81,9 @@ public class E52_TimeSpan_API {
   }
 
   @PutMapping("/{timeSpanId}")
-  public ResponseEntity<String> UpdateE52DateTime(@PathVariable String timeSpanId, @RequestBody LocalDateTime newDateTime) {
+  public ResponseEntity<String> UpdateE52Date(@PathVariable String timeSpanId, @RequestBody E52_TimeSpan_DTO timeSpanDTO) {
 
-    timeSpanSvc.updateE52DateTime(timeSpanId, newDateTime);
+    timeSpanSvc.updateE52Date(timeSpanId, timeSpanDTO);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }

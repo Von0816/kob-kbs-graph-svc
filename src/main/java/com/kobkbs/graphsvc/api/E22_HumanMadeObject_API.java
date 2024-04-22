@@ -2,6 +2,7 @@ package com.kobkbs.graphsvc.api;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 import com.kobkbs.graphsvc.service.E22_HumanMadeObject_SvcImp;
+import com.kobkbs.graphsvc.dto.E22_HumanMadeObject_DTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,21 +27,27 @@ public class E22_HumanMadeObject_API {
       return hmoSvc.getAllE22();
   }
 
+  @GetMapping("/type/{hmoType}")
+  public List<E22_HumanMadeObject> GetE22ByType(@PathVariable String hmoType) {
+
+    return hmoSvc.getE22ByType(hmoType);
+  }
+
   @GetMapping("/p54/{placeName}")
-  public List<E22_HumanMadeObject> GetE22ByCurrPermaLocName(String placeName) {
+  public List<E22_HumanMadeObject> GetE22ByCurrPermaLocName(@PathVariable String placeName) {
 
     return hmoSvc.getE22ByCurrPermaLocName(placeName);
 
   }
 
   @GetMapping("/p55/{placeName}")
-  public List<E22_HumanMadeObject> GetE22ByCurrLocName(String placeName) {
+  public List<E22_HumanMadeObject> GetE22ByCurrLocName(@PathVariable String placeName) {
 
     return hmoSvc.getE22ByCurrLocName(placeName);
   }
 
   @GetMapping("/p51/{ownerName}")
-  public List<E22_HumanMadeObject> GetE22ByOwnerPersonName(String ownerName) {
+  public List<E22_HumanMadeObject> GetE22ByOwnerPersonName(@PathVariable String ownerName) {
 
     List<E22_HumanMadeObject> newList = Stream.concat(hmoSvc.getE22ByOwnerPersonName(ownerName).stream(), hmoSvc.getE22ByOwnerGroupName(ownerName).stream()).toList();
 
@@ -60,9 +67,9 @@ public class E22_HumanMadeObject_API {
   }
 
   @PostMapping
-  public ResponseEntity<String> CreateE22(@RequestBody String hmoName) {
+  public ResponseEntity<String> CreateE22(@RequestBody E22_HumanMadeObject_DTO request) {
 
-    hmoSvc.createE22(hmoName);
+    hmoSvc.createE22(request);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }

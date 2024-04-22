@@ -25,21 +25,21 @@ public interface E21_Person_Repo extends Neo4jRepository<E21_Person, String> {
   @Query("MATCH (person:E21_Person {id: $personId}) SET person.name = $newName")
   E21_Person updateE21Name(@Param("personId") String personId, @Param("newName") String newName);
 
-  @Query("MATCH (child:E21_Person {id: $personId}) WITH child MATCH (parent:E21_Person {id: $parentId}) MERGE (child)-[:P152_has_parent]->(parent)")
+  @Query("MATCH (child:E21_Person {id: $personId}) WITH child MATCH (parent:E21_Person {id: $parentId}) MERGE (child)-[:P152_HAS_PARENT]->(parent)")
   void createP152(@Param("personId") String personId, @Param("parentId") String parentId);
 
-  @Query("MATCH (person:E21_Person {id: $personId}) WITH person MATCH (place:E53_Place {id: $placeId}) MERGE (person)-[:P74_has_current_or_former_residence]->(place)")
+  @Query("MATCH (person:E21_Person {id: $personId}) WITH person MATCH (place:E53_Place {id: $placeId}) MERGE (person)-[:P74_HAS_CURRENT_OR_FORMER_RESIDENCE]->(place)")
   void createP74(@Param("personId") String personId, @Param("placeId") String placeId);
 
-  @Query("MATCH (person:E21_Person {id: $personId}) WITH person MATCH (right:E30_Right {id: $rightId}) MERGE (person)-[:P30_possesses]->(right)")
+  @Query("MATCH (person:E21_Person {id: $personId}) WITH person MATCH (right:E30_Right {id: $rightId}) MERGE (person)-[:P30_POSSESSES]->(right)")
   void createP30(@Param("personId") String personId, @Param("rightId") String rightId);
 
-  @Query("MATCH (:E21_Person {id: $personId})-[r:P152_has_parent]->(:E21_Person {id: $parentId}) DELETE r")
+  @Query("MATCH (:E21_Person {id: $personId})-[r:P152_HAS_PARENT]->(:E21_Person {id: $parentId}) DELETE r")
   void deleteP152(@Param("personId") String personId, @Param("parentId") String parentId);
 
-  @Query("MATCH (:E21_Person {id: $personId})-[r:P74_has_current_or_former_residence]->(:E53_Place {id: $placeId}) DELETE r")
+  @Query("MATCH (:E21_Person {id: $personId})-[r:P74_HAS_CURRENT_OR_FORMER_RESIDENCE]->(:E53_Place {id: $placeId}) DELETE r")
   void deleteP74(@Param("personId") String personId, @Param("placeId") String placeId);
 
-  @Query("MATCH (:E21_Person {id: $personId})-[r:P30_possesses]->(:E30_Right {id: $rightId}) DELETE r")
+  @Query("MATCH (:E21_Person {id: $personId})-[r:P30_POSSESSES]->(:E30_Right {id: $rightId}) DELETE r")
   void deleteP30(@Param("personId") String personId, @Param("rightId") String rightId);
 }

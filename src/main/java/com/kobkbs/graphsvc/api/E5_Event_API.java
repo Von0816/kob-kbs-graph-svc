@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -52,6 +53,12 @@ public class E5_Event_API {
     return newList;
   }
 
+  @GetMapping("/p4/{date}")
+  public List<E5_Event> GetE5ByDate(@PathVariable LocalDate date) {
+
+    return eventSvc.getE5ByTimeSpan(date);
+  }
+
   @PostMapping
   public ResponseEntity<String> CreateE5Event(@RequestBody String eventName) {
 
@@ -80,6 +87,14 @@ public class E5_Event_API {
   public ResponseEntity<String> CreateP11G(@PathVariable String eventId, @PathVariable String groupId) {
 
     eventSvc.createP11G(eventId, groupId);
+
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @PostMapping("/{eventId}/p4/{timeSpanId}")
+  public ResponseEntity<String> CreateP4(@PathVariable String eventId, @PathVariable String timeSpanId) {
+
+    eventSvc.createP4(eventId, timeSpanId);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
@@ -120,6 +135,14 @@ public class E5_Event_API {
   public ResponseEntity<String> DeleteP11G(@PathVariable String eventId, @PathVariable String groupId) {
     
     eventSvc.deleteP7(eventId, groupId);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @DeleteMapping("/{eventId}/p4/{timeSpanId}")
+  public ResponseEntity<String> DeleteP4(@PathVariable String eventId, @PathVariable String timeSpanId) {
+
+    eventSvc.deleteP4(eventId, timeSpanId);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }
