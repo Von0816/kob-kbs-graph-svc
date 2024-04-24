@@ -33,7 +33,7 @@ public class E30_Right_SvcImp implements E30_Right_Svc {
   }
 
   @Override
-  public E30_Right getE30ByName(String rightName) {
+  public List<E30_Right> getE30ByName(String rightName) {
 
     return rightRepo.findByName(rightName);
   }

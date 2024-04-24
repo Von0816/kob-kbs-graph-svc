@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.kobkbs.graphsvc.model.E53_Place;
 
 public interface E53_Place_Repo extends Neo4jRepository<E53_Place, String> {
-  E53_Place findByName(String name);
+  List<E53_Place> findByName(String name);
 
   @Query("MATCH (place:E53_Place {id: $placeId}) SET place.name = $newName")
   void updateE53Name(@Param("placeId") String placeId, @Param("newName") String newName);

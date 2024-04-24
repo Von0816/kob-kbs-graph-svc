@@ -11,7 +11,7 @@ public interface E21_Person_Svc {
   List<E21_Person> getE21ByParentName(String parentName);
   List<E21_Person> getE21ByRightName(String rightName);
   List<E21_Person> getE21ByResidenceName(String residenceName);
-  E21_Person getE21ByName(String personName);
+  List<E21_Person> getE21ByName(String personName);
   Optional<E21_Person> getE21ById(String personId);
   void createE21(String personName);
   void createP152(String personId, String parentId);

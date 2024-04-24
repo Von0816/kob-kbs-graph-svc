@@ -34,7 +34,7 @@ public class E53_Place_SvcImp implements E53_Place_Svc{
   }
 
   @Override
-  public E53_Place getE53ByName(String placeName) {
+  public List<E53_Place> getE53ByName(String placeName) {
 
      return placeRepo.findByName(placeName);
   }

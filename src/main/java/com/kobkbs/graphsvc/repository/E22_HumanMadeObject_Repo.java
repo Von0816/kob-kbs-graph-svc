@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 
 public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeObject, String> {
-  E22_HumanMadeObject findByName(String hmoName);
+  List<E22_HumanMadeObject> findByName(String hmoName);
   List<E22_HumanMadeObject> findByType(String hmoType);
   List<E22_HumanMadeObject> findByCurrPermaLocName(String currPermaLocName);
   List<E22_HumanMadeObject> findByCurrLocName(String currLocName);

@@ -42,7 +42,7 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   }
 
   @Override
-  public E74_Group getE74ByName(String groupName) {
+  public List<E74_Group> getE74ByName(String groupName) {
 
     return groupRepo.findByName(groupName);
   }

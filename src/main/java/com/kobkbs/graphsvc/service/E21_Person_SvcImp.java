@@ -55,7 +55,7 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
-  public E21_Person getE21ByName(String personName) {
+  public List<E21_Person> getE21ByName(String personName) {
 
     return personRepo.findByName(personName);
   }

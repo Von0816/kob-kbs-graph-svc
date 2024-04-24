@@ -31,7 +31,7 @@ public class E30_Right_API {
   }
 
   @GetMapping("/name/{rightName}")
-  public E30_Right GetE30RightByName(@PathVariable String rightName) {
+  public List<E30_Right> GetE30RightByName(@PathVariable String rightName) {
 
     return rightSvc.getE30ByName(rightName);
   }

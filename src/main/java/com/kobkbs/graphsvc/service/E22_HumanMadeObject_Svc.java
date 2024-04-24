@@ -15,7 +15,7 @@ public interface E22_HumanMadeObject_Svc {
   List<E22_HumanMadeObject> getE22ByOwnerPersonName(String ownerPersonName);
   List<E22_HumanMadeObject> getE22ByOwnerGroupName(String ownerGroupName);
   Optional<E22_HumanMadeObject> getE22ById(String hmoId);
-  E22_HumanMadeObject getE22ByName(String hmoName);
+  List<E22_HumanMadeObject> getE22ByName(String hmoName);
   void createE22(E22_HumanMadeObject_DTO hmoDTO);
   void updateE22Name(String hmoId, String newName);
   void createP54(String hmoId, String placeId);

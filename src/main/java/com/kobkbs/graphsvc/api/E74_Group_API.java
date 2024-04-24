@@ -38,7 +38,7 @@ public class E74_Group_API {
   }
 
   @GetMapping("/name/{groupName}")
-  public E74_Group GetE74ByName(@PathVariable String groupName) {
+  public List<E74_Group> GetE74ByName(@PathVariable String groupName) {
 
     return groupSvc.getE74ByName(groupName);
   }

@@ -9,7 +9,7 @@ public interface E74_Group_Svc {
 
   List<E74_Group> getAllE74();
   List<E74_Group> getE74ByMemberName(String memberName);
-  E74_Group getE74ByName(String groupName);
+  List<E74_Group> getE74ByName(String groupName);
   Optional<E74_Group> getE74ById(String groupId);
   void createE74(String groupName);
   void createP107(String groupId, String personId);

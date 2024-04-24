@@ -32,7 +32,7 @@ public class E21_Person_API {
   }
 
   @GetMapping("/name/{personName}")
-  public E21_Person GetE21ByName(@PathVariable String personName) {
+  public List<E21_Person> GetE21ByName(@PathVariable String personName) {
 
     return personSvc.getE21ByName(personName);
   }

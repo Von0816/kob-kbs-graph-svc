@@ -60,7 +60,7 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   }
 
   @Override
-  public E5_Event getE5ByName(String eventName) {
+  public List<E5_Event> getE5ByName(String eventName) {
 
     return eventRepo.findByName(eventName);
   }

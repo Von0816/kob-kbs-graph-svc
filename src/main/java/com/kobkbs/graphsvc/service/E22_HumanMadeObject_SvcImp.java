@@ -70,7 +70,7 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
   }
 
   @Override
-  public E22_HumanMadeObject getE22ByName(String hmoName) {
+  public List<E22_HumanMadeObject> getE22ByName(String hmoName) {
 
     return humanMadeObjectRepo.findByName(hmoName);
   }

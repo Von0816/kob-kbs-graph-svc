@@ -1,5 +1,4 @@
 server:
-  port: 8050
   error:
     include-message: 'always'
 spring:
@@ -9,7 +8,7 @@ spring:
     uri: 'neo4j+s://5203e0d8.databases.neo4j.io'
     authentication: 
       username: 'neo4j'
-      password: ${N4J_Pass} 
+      password: ${N4J_INSTANCE_PASS} 
   # security:
   #   oauth2:
   #     client:

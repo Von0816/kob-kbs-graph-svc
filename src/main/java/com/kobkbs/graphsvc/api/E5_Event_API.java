@@ -27,14 +27,14 @@ public class E5_Event_API {
       return eventSvc.getAllE5();
   }
 
-  @GetMapping("/id/{event_id}")
+  @GetMapping("/id/{eventId}")
   public Optional<E5_Event> GetE5EventById(@PathVariable String eventId) {
 
     return eventSvc.getE5ById(eventId);
   }
 
   @GetMapping("/name/{eventName}")
-  public E5_Event GetE5ByName(@PathVariable String eventName) {
+  public List<E5_Event> GetE5ByName(@PathVariable String eventName) {
 
     return eventSvc.getE5ByName(eventName);
   }

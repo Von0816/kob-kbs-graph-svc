@@ -61,7 +61,7 @@ public class E22_HumanMadeObject_API {
   }
 
   @GetMapping("/name/{hmoName}")
-  public E22_HumanMadeObject GetE22ByHMOName(@PathVariable String hmoName) {
+  public List<E22_HumanMadeObject> GetE22ByHMOName(@PathVariable String hmoName) {
 
     return hmoSvc.getE22ByName(hmoName);
   }

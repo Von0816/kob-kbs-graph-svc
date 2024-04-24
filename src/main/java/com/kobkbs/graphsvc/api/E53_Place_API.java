@@ -26,7 +26,7 @@ public class E53_Place_API {
   }
 
   @GetMapping("/name/{placeName}")
-  public E53_Place GetE53ByPlaceName(@PathVariable String placeName) {
+  public List<E53_Place> GetE53ByPlaceName(@PathVariable String placeName) {
 
     return placeSvc.getE53ByName(placeName);
   }

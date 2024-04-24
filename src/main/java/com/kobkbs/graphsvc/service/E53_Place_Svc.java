@@ -8,7 +8,7 @@ import com.kobkbs.graphsvc.model.E53_Place;
 public interface E53_Place_Svc {
 
   List<E53_Place> getAllE53();
-  E53_Place getE53ByName(String placeName);
+  List<E53_Place> getE53ByName(String placeName);
   Optional<E53_Place> getE53ById(String placeId);
   void createE53(String placeName);
   void updateE53Name(String placeId, String newName);
