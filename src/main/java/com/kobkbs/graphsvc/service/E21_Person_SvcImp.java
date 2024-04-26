@@ -25,6 +25,8 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   private final E53_Place_Repo placeRepo;
   private final E30_Right_Repo rightRepo;
 
+  //Get
+
   @Override
   public List<E21_Person> getAllE21() {
     return personRepo.findAll();
@@ -61,9 +63,19 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
+  public List<E21_Person> getE21ByLikeName(String personName) {
+
+    return personRepo.findByLikeName(personName);
+  }
+
+  //Create node
+
+  @Override
   public void createE21(String personName) {
     personRepo.save(E21_Person.builder().name(personName).build());
   }
+
+  //Create relationship
 
   @Override
   public void createP152(String personId, String parentId) {
@@ -101,6 +113,8 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
     }
   }
 
+  //Update node
+
   @Override
   public void updateE21Name(String personId, String newName) {
     if(personRepo.findById(personId).isPresent()) {
@@ -111,10 +125,14 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
     }
   }
 
+  //Delete node
+
   @Override
   public void deleteE21ById(String personId) {
     personRepo.delete(personRepo.findById(personId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Does Not Exist")));
   }
+
+  //Delete relationship
 
   @Override
   public void deleteP152(String personId, String parentId) {

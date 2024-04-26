@@ -34,7 +34,7 @@ public class E21_Person_API {
   @GetMapping("/name/{personName}")
   public List<E21_Person> GetE21ByName(@PathVariable String personName) {
 
-    return personSvc.getE21ByName(personName);
+    return personSvc.getE21ByLikeName(personName);
   }
 
   @GetMapping("/p152/{parentName}")
@@ -71,7 +71,7 @@ public class E21_Person_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @PutMapping("/{personId}/p152/{parentId}")
+  @PostMapping("/{personId}/p152/{parentId}")
   public ResponseEntity<String> createP152(@PathVariable String personId, @PathVariable String parentId) {
 
     personSvc.createP152(personId, parentId);
@@ -79,7 +79,7 @@ public class E21_Person_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @PutMapping("/{personId}/p74/{placeId}")
+  @PostMapping("/{personId}/p74/{placeId}")
   public ResponseEntity<String> createP74(@PathVariable String personId, @PathVariable String placeId) {
 
     personSvc.createP74(personId, placeId);
@@ -87,7 +87,7 @@ public class E21_Person_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @PutMapping("/{personId}/p30/{rightId}")
+  @PostMapping("/{personId}/p30/{rightId}")
   public ResponseEntity<String> createP30(@PathVariable String personId, @PathVariable String rightId) {
 
     personSvc.createP30(personId, rightId);
