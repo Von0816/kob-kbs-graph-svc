@@ -65,7 +65,7 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   @Override
   public List<E21_Person> getE21ByLikeName(String personName) {
 
-    return personRepo.findByLikeName(personName);
+    return personRepo.findByNameContainsIgnoreCase(personName);
   }
 
   //Create node
