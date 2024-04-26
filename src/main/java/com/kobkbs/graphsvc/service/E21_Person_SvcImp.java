@@ -59,12 +59,6 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   @Override
   public List<E21_Person> getE21ByName(String personName) {
 
-    return personRepo.findByName(personName);
-  }
-
-  @Override
-  public List<E21_Person> getE21ByLikeName(String personName) {
-
     return personRepo.findByNameContainsIgnoreCase(personName);
   }
 
@@ -117,11 +111,11 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
 
   @Override
   public void updateE21Name(String personId, String newName) {
-    if(personRepo.findById(personId).isPresent()) {
+    if(personRepo.existsById(personId)) {
       personRepo.updateE21Name(personId, newName);
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E21 Person with id: " + personId + " Does Not Exist");
     }
   }
 
@@ -129,7 +123,12 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
 
   @Override
   public void deleteE21ById(String personId) {
-    personRepo.delete(personRepo.findById(personId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Does Not Exist")));
+    if(personRepo.existsById(personId)) {
+      personRepo.deleteById(personId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E21 Person with id: " + personId + " does not exist.");
+    }
   }
 
   //Delete relationship

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import com.kobkbs.graphsvc.model.E5_Event;
 
 public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
-  List<E5_Event> findByName(String eventName);
+  List<E5_Event> findByNameContainsIgnoreCase(String eventName);
   List<E5_Event> findByLocationName(String placeName);
   List<E5_Event> findByParticipantPersonName(String personName);
   List<E5_Event> findByParticipantGroupName(String groupName);

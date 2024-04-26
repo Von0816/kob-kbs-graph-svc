@@ -36,7 +36,7 @@ public class E53_Place_SvcImp implements E53_Place_Svc{
   @Override
   public List<E53_Place> getE53ByName(String placeName) {
 
-     return placeRepo.findByName(placeName);
+     return placeRepo.findByNameContainsIgnoreCase(placeName);
   }
 
   @Override
@@ -48,16 +48,21 @@ public class E53_Place_SvcImp implements E53_Place_Svc{
   @Override
   public void updateE53Name(String placeId, String newName) {
   
-    if(placeRepo.findById(placeId).isPresent()) {
+    if(placeRepo.existsById(placeId)) {
       placeRepo.updateE53Name(placeId, newName);
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Place Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E53 Place with id: " + placeId + " Does Not Exist");
     }
   }
 
   @Override
   public void deleteE53ById(String placeId) {
-    placeRepo.delete(placeRepo.findById(placeId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Place Does Not Exist")));
+    if(placeRepo.existsById(placeId)) {
+      placeRepo.deleteById(placeId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E53 Place with id " + placeId + " does not exist.");
+    }
   }
 }

@@ -75,7 +75,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   @Override
   public void updateE52Date(String timeSpanId, E52_TimeSpan_DTO timeSpanDTO) {
 
-    if(timeSpanRepo.findById(timeSpanId).isPresent()) {
+    if(timeSpanRepo.existsById(timeSpanId)) {
       if(timeSpanDTO.month() < 1 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 1 || timeSpanDTO.day() > 31) {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
       }
@@ -84,7 +84,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
       }
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Time-span does not exist.");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E52 Time-span with id: " + timeSpanId + " does not exist.");
     }
   }
 
@@ -101,7 +101,13 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
 
   @Override
   public void deleteE52ById(String timeSpanId) {
-    timeSpanRepo.delete(timeSpanRepo.findById(timeSpanId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Time Span Does Not Exist")));
+    
+    if(timeSpanRepo.existsById(timeSpanId)) {
+      timeSpanRepo.deleteById(timeSpanId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E52 Time-span with id: " + timeSpanId + " does not exist.");
+    }
   }
 
   @Override

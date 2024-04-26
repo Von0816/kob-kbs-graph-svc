@@ -62,7 +62,7 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   @Override
   public List<E5_Event> getE5ByName(String eventName) {
 
-    return eventRepo.findByName(eventName);
+    return eventRepo.findByNameContainsIgnoreCase(eventName);
   }
 
   @Override
@@ -136,13 +136,26 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   @Override
   public void updateE5Name(String eventId, String newName) {
 
-    eventRepo.updateE5Name(eventId, newName);
+    if(eventRepo.existsById(eventId)) {
+
+      eventRepo.updateE5Name(eventId, newName);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E5 Event with id: " + eventId + " does not exist.");
+    }
+
   }
 
 
   @Override
   public void deleteE5ById(String eventId) {
-    eventRepo.delete(eventRepo.findById(eventId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event Does Not Exist")));
+
+    if(eventRepo.existsById(eventId)) {
+      eventRepo.deleteById(eventId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E5 Event with id: " + eventId + " does not exist.");
+    }
   }
 
   @Override

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import com.kobkbs.graphsvc.model.E21_Person;
 
 public interface E21_Person_Repo extends Neo4jRepository<E21_Person, String> {
-  List<E21_Person> findByName(String personName);
   List<E21_Person> findByNameContainsIgnoreCase(String name);
   List<E21_Person> findByParentName(String parentName);
   List<E21_Person> findByRightName(String rightName);

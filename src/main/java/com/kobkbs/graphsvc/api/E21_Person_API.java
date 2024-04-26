@@ -34,7 +34,7 @@ public class E21_Person_API {
   @GetMapping("/name/{personName}")
   public List<E21_Person> GetE21ByName(@PathVariable String personName) {
 
-    return personSvc.getE21ByLikeName(personName);
+    return personSvc.getE21ByName(personName);
   }
 
   @GetMapping("/p152/{parentName}")

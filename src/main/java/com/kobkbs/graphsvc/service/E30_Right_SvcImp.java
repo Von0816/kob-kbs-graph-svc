@@ -35,7 +35,7 @@ public class E30_Right_SvcImp implements E30_Right_Svc {
   @Override
   public List<E30_Right> getE30ByName(String rightName) {
 
-    return rightRepo.findByName(rightName);
+    return rightRepo.findByNameContainsIgnoreCase(rightName);
   }
 
   @Override
@@ -47,17 +47,22 @@ public class E30_Right_SvcImp implements E30_Right_Svc {
   @Override
   public void updateE30Name(String rightId, String newName) {
 
-    if(rightRepo.findById(rightId).isPresent()) {
+    if(rightRepo.existsById(rightId)) {
       rightRepo.updateE21Name(rightId, newName);
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E30 Right with id: " + rightId + " does not exist.");
     }
   }
 
   @Override
   public void deleteE30ById(String rightId) {
 
-    rightRepo.delete(rightRepo.findById(rightId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Does Not Exist")));
+    if(rightRepo.existsById(rightId)) {
+      rightRepo.deleteById(rightId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E30 Right with id: " + rightId + " does not exist.");
+    }
   }
 }

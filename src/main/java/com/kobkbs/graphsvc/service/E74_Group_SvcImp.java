@@ -44,7 +44,7 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   @Override
   public List<E74_Group> getE74ByName(String groupName) {
 
-    return groupRepo.findByName(groupName);
+    return groupRepo.findByNameContainsIgnoreCase(groupName);
   }
 
   @Override
@@ -70,18 +70,23 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   @Override
   public void updateE74Name(String groupId, String newName) {
 
-    if(groupRepo.findById(groupId).isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found");
+    if(groupRepo.existsById(groupId)) {
+      groupRepo.updateE74Name(groupId, newName);
     }
     else {
-      groupRepo.updateE74Name(groupId, newName);
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E74 Group with id: " + groupId + " does not exist.");
     }
   }
 
   @Override
   public void deleteE74ById(String groupId) {
 
-    groupRepo.delete(groupRepo.findById(groupId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Does Not Exist")));
+    if(groupRepo.existsById(groupId)) {
+      groupRepo.deleteById(groupId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E74 Group with id: " + groupId + " does not exist.");
+    }
   }
 
   @Override

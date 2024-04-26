@@ -72,7 +72,7 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
   @Override
   public List<E22_HumanMadeObject> getE22ByName(String hmoName) {
 
-    return humanMadeObjectRepo.findByName(hmoName);
+    return humanMadeObjectRepo.findByNameContainsIgnoreCase(hmoName);
   }
 
   @Override
@@ -83,11 +83,11 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
 
   @Override
   public void updateE22Name(String hmoId, String newName) {
-    if(humanMadeObjectRepo.findById(hmoId).isPresent()) {
+    if(humanMadeObjectRepo.existsById(hmoId)) {
       humanMadeObjectRepo.updateE22Name(hmoId, newName);
     }
     else {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Human Made Object Does Not Exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E22 Human Made Object with id: " + hmoId + " Does Not Exist");
     }
   }
 
@@ -146,7 +146,12 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
 
   @Override
   public void deleteE22(String hmoId) {
-    humanMadeObjectRepo.delete(humanMadeObjectRepo.findById(hmoId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Human Made Object Does Not Exist")));
+    if(humanMadeObjectRepo.existsById(hmoId)) {
+      humanMadeObjectRepo.deleteById(hmoId);
+    }
+    else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E22 Human Made Object with id: " + hmoId + " does not exist.");
+    }
   }
 
   @Override
