@@ -22,7 +22,7 @@ import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com/*")
+@CrossOrigin
 @RestController
 @RequestMapping("/v1/search")
 @RequiredArgsConstructor
