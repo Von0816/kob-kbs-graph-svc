@@ -35,7 +35,6 @@ public class SearchGateway {
   private final E53_Place_SvcImp placeSvc;
   private final E74_Group_SvcImp groupSvc;
 
-  @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
   @GetMapping
   @ResponseBody
   public List<SearchGateway_DTO> getAll(@RequestParam String name) {
