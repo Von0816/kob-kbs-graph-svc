@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E74_Group;
 import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/e74_group")
+@RequestMapping("/v1/e74-group")
 @RequiredArgsConstructor
 public class E74_Group_API {
   

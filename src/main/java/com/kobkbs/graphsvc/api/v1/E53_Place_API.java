@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E53_Place;
 import com.kobkbs.graphsvc.service.E53_Place_SvcImp;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/e53_place")
+@RequestMapping("/v1/e53-place")
 @RequiredArgsConstructor
 public class E53_Place_API {
   
@@ -25,17 +25,16 @@ public class E53_Place_API {
     return placeSvc.getAllE53();
   }
 
-  @GetMapping("/name/{placeName}")
-  public List<E53_Place> GetE53ByPlaceName(@PathVariable String placeName) {
-
-    return placeSvc.getE53ByName(placeName);
-  }
-
-
   @GetMapping("/id/{placeId}")
   public Optional<E53_Place> GetE53PlaceById(@PathVariable String placeId) {
 
     return placeSvc.getE53ById(placeId);
+  }
+
+  @GetMapping("/name/{placeName}")
+  public List<E53_Place> GetE53ByPlaceName(@PathVariable String placeName) {
+
+    return placeSvc.getE53ByName(placeName);
   }
 
   @PostMapping

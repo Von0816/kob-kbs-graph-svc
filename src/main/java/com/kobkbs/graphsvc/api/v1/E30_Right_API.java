@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E30_Right;
 import com.kobkbs.graphsvc.service.E30_Right_Svc;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/e30_right")
+@RequestMapping("/v1/e30-right")
 @RequiredArgsConstructor
 public class E30_Right_API {
   

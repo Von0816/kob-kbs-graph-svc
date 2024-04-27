@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E21_Person;
 import com.kobkbs.graphsvc.service.E21_Person_SvcImp;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/e21_person")
+@RequestMapping("/v1/e21-person")
 @RequiredArgsConstructor
 public class E21_Person_API {
   

@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E5_Event;
 import com.kobkbs.graphsvc.service.E5_Event_SvcImp;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/e5_event")
+@RequestMapping("/v1/e5-event")
 @RequiredArgsConstructor
 public class E5_Event_API {
   

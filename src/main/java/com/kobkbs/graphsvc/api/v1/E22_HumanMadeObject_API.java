@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 import com.kobkbs.graphsvc.service.E22_HumanMadeObject_SvcImp;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/e22_human_made_object")
+@RequestMapping("/v1/e22-hmo")
 @RequiredArgsConstructor
 public class E22_HumanMadeObject_API {
   
@@ -25,6 +25,18 @@ public class E22_HumanMadeObject_API {
   public List<E22_HumanMadeObject> GetAllE22HMO() {
 
       return hmoSvc.getAllE22();
+  }
+
+  @GetMapping("/id/{hmoId}")
+  public Optional<E22_HumanMadeObject> GetE22HMOById(@PathVariable String hmoId) {
+
+    return hmoSvc.getE22ById(hmoId);
+  }
+
+  @GetMapping("/name/{hmoName}")
+  public List<E22_HumanMadeObject> GetE22ByHMOName(@PathVariable String hmoName) {
+
+    return hmoSvc.getE22ByName(hmoName);
   }
 
   @GetMapping("/type/{hmoType}")
@@ -52,18 +64,6 @@ public class E22_HumanMadeObject_API {
     List<E22_HumanMadeObject> newList = Stream.concat(hmoSvc.getE22ByOwnerPersonName(ownerName).stream(), hmoSvc.getE22ByOwnerGroupName(ownerName).stream()).toList();
 
     return newList;
-  }
-
-  @GetMapping("/id/{hmoId}")
-  public Optional<E22_HumanMadeObject> GetE22HMOById(@PathVariable String hmoId) {
-
-    return hmoSvc.getE22ById(hmoId);
-  }
-
-  @GetMapping("/name/{hmoName}")
-  public List<E22_HumanMadeObject> GetE22ByHMOName(@PathVariable String hmoName) {
-
-    return hmoSvc.getE22ByName(hmoName);
   }
 
   @PostMapping

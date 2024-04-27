@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api;
+package com.kobkbs.graphsvc.api.v1;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +22,7 @@ import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/e52_time-span")
+@RequestMapping("/v1/e52-time-span")
 @RequiredArgsConstructor
 public class E52_TimeSpan_API {
 
@@ -52,7 +52,7 @@ public class E52_TimeSpan_API {
     return timeSpanSvc.getE52ByMonth(month);
   }
 
-  @GetMapping("/date_time/{dateTime}")
+  @GetMapping("/datetime/{dateTime}")
   public E52_TimeSpan GetE52ByDate(@PathVariable LocalDate dateTime) {
 
     return timeSpanSvc.getE52ByDate(dateTime);
