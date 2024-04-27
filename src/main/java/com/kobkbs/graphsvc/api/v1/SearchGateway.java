@@ -22,7 +22,7 @@ import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin
+@CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com/*", maxAge = 600)
 @RestController
 @RequestMapping("/v1/search")
 @RequiredArgsConstructor
@@ -43,7 +43,7 @@ public class SearchGateway {
     List<SearchGateway_DTO> entityList = new ArrayList<SearchGateway_DTO>(); 
 
     eventSvc.getE5ByName(name).forEach(entity -> {
-      entityList.add(new SearchGateway_DTO("E5 Event", "e5i-event", entity.getId(), entity.getName()));
+      entityList.add(new SearchGateway_DTO("E5 Event", "e5-event", entity.getId(), entity.getName()));
     });;
 
     personSvc.getE21ByName(name).forEach(entity -> {

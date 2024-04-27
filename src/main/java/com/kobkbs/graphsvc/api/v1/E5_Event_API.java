@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com/*", maxAge = 600)
 @RestController
 @RequestMapping("/v1/e5-event")
 @RequiredArgsConstructor

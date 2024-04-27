@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com/*", maxAge = 600)
 @RestController
 @RequestMapping("/v1/e74-group")
 @RequiredArgsConstructor

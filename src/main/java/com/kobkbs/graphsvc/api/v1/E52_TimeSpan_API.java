@@ -21,6 +21,7 @@ import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com/*", maxAge = 600)
 @RestController
 @RequestMapping("/v1/e52-time-span")
 @RequiredArgsConstructor
