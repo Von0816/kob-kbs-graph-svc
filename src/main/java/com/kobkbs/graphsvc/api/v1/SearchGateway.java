@@ -22,6 +22,7 @@ import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/v1/search")
 @RequiredArgsConstructor
