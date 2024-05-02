@@ -62,7 +62,7 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
 
   @Override
   public void createE52(E52_TimeSpan_DTO timeSpanDTO) {
-      E52_TimeSpan timeSpan =  E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).day(timeSpanDTO.day()).month(timeSpanDTO.month()).build();
+      timeSpanRepo.save(E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).day(timeSpanDTO.day()).month(timeSpanDTO.month()).build());
     // else if(timeSpanDTO.month() < 0 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 0 || timeSpanDTO.day() > 31) {
     //   throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
     // }
