@@ -29,9 +29,6 @@ public interface E52_TimeSpan_Repo extends Neo4jRepository<E52_TimeSpan, String>
   @Query("MATCH (childTS:E52_TimeSpan {id: $childTSID})-[:P86_FALLS_WITHIN]->(:E52_TimeSpan {id: $parentTSID}) RETURN childTS")
   List<E52_TimeSpan> findP86(@Param("childTSID") String childTSID, @Param("parentTSID") String parentTSID);
 
-  @Query("CREATE (timeSpan:E52_TimeSpan {id: $timeSpanId, type: \"decade\", year: $timeSpanYear})")
-  E52_TimeSpan createE52Decade(@Param("timeSpanId") String timeSpanId, @Param("timeSpanYear") String timeSpanYear);
-
   @Query("MATCH (timeSpan:E52_TimeSpan {id: $timeSpanId}) SET timeSpan.type = $newType, timeSpan.year = $newYear, timeSpan.month = $newMonth, timeSpan.day = $newDay")
   E52_TimeSpan updateE52Date(@Param("timeSpanId") String timeSpanId, @Param("newType") String newType, @Param("newYear") String newYear, @Param("newMonth") int newMonth, @Param("newDay") int newDay);
   
