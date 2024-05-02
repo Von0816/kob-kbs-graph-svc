@@ -46,7 +46,7 @@ public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
   void createP11G(@Param("eventId") String eventId, @Param("groupId") String groupId);
 
   //create P4
-  @Query("MATCH (event:E5_Event {id: $eventId}) WITH event MATCH (timeSpan:E52_TimeSpan {id: $timeSpanId}) MERGE (event)-[:P4_HAS_TIME_SPAN]->(timeSpanId)")
+  @Query("MATCH (event:E5_Event {id: $eventId}) WITH event MATCH (timeSpan:E52_TimeSpan {id: $timeSpanId}) MERGE (event)-[:P4_HAS_TIME_SPAN]->(timeSpan)")
   void createP4(@Param("eventId") String eventId, @Param("timeSpanId") String timeSpanId);
 
   //delete P7_TOOK_PLACE_AT
