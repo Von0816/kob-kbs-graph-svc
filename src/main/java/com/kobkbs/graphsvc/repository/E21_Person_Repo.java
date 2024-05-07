@@ -1,17 +1,22 @@
 package com.kobkbs.graphsvc.repository;
 
 import java.util.List;
+
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.kobkbs.graphsvc.model.E21_Person;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E21_Person_Repo extends Neo4jRepository<E21_Person, String> {
-  List<E21_Person> findByNameContainsIgnoreCase(String name);
+  List<E21_Person> findByName(String name);
   List<E21_Person> findByParentName(String parentName);
   List<E21_Person> findByRightName(String rightName);
   List<E21_Person> findByResidenceName(String residenceName);
+
+  @Query("MATCH (n:E21_Person WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
+  List<GetIdAndNameOnly> findContainsName(String name);
 
   @Query("MATCH (person:E21_Person {id: $personId})-[:P152_has_parent]->(:E21_Person {id: $parentId}) RETURN person") 
   List<E21_Person> findP152(@Param("personId") String personId, @Param("parentId") String parentId);

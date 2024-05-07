@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E53_Place;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class E53_Place_SvcImp implements E53_Place_Svc{
     return placeRepo.findAll();
   }
 
+  @Override
+  public List<E53_Place> getE53ByName(String name) {
+
+    return placeRepo.findByName(name);
+  }
 
   @Override
   public Optional<E53_Place> getE53ById(String placeId) {
@@ -34,9 +40,9 @@ public class E53_Place_SvcImp implements E53_Place_Svc{
   }
 
   @Override
-  public List<E53_Place> getE53ByName(String placeName) {
+  public List<GetIdAndNameOnly> getE53ContainsName(String placeName) {
 
-     return placeRepo.findByNameContainsIgnoreCase(placeName);
+     return placeRepo.findContainsName(placeName);
   }
 
   @Override

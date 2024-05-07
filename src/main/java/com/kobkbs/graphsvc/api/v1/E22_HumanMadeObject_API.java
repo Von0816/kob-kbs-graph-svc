@@ -83,7 +83,7 @@ public class E22_HumanMadeObject_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @PutMapping("/{hmoId}/p54/{placeId}")
+  @PostMapping("/{hmoId}/p54/{placeId}")
   public ResponseEntity<String> createP54(@PathVariable String hmoId, @PathVariable String placeId) {
 
     hmoSvc.createP54(hmoId, placeId);
@@ -91,7 +91,7 @@ public class E22_HumanMadeObject_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/{hmoId}/p55/{placeId}")
+  @PostMapping("/{hmoId}/p55/{placeId}")
   public ResponseEntity<String> createP55(@PathVariable String hmoId, @PathVariable String placeId) {
 
     hmoSvc.createP55(hmoId, placeId);
@@ -99,7 +99,7 @@ public class E22_HumanMadeObject_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/{hmoId}/p51p/{personId}")
+  @PostMapping("/{hmoId}/p51p/{personId}")
   public ResponseEntity<String> createP51P(@PathVariable String hmoId, @PathVariable String personId) {
 
     hmoSvc.createP51P(hmoId, personId);
@@ -107,7 +107,7 @@ public class E22_HumanMadeObject_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/{hmoId}/p51g/{groupId}")
+  @PostMapping("/{hmoId}/p51g/{groupId}")
   public ResponseEntity<String> createP51G(@PathVariable String hmoId, @PathVariable String groupId) {
 
     hmoSvc.createP51G(hmoId, groupId);

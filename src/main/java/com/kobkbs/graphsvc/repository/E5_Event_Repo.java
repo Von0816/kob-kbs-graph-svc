@@ -8,13 +8,17 @@ import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.kobkbs.graphsvc.model.E5_Event;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
-  List<E5_Event> findByNameContainsIgnoreCase(String eventName);
+  List<E5_Event> findByName(String name);
   List<E5_Event> findByLocationName(String placeName);
   List<E5_Event> findByParticipantPersonName(String personName);
   List<E5_Event> findByParticipantGroupName(String groupName);
   List<E5_Event> findByTimeSpan(LocalDate date);
+
+  @Query("MATCH (n:E5_Event WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
+  List<GetIdAndNameOnly> findContainsName(String name);
 
   @Query("MATCH (event:E5_Event {id: $eventId})-[:P7_TOOK_PLACE_AT]->(:E53_Place {id: $placeId}) RETURN event")
   List<E5_Event> findP7(@Param("eventId") String eventId, @Param("placeId") String placeId);

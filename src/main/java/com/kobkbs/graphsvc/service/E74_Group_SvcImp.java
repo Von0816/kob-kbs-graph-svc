@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E74_Group;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E74_Group_Repo;
 
@@ -30,6 +31,12 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   }
 
   @Override
+  public List<E74_Group> getE74ByName(String name) {
+
+    return groupRepo.findByName(name);
+  }
+
+  @Override
   public List<E74_Group> getE74ByMemberName(String memberName) {
 
     return groupRepo.findByMemberName(memberName);
@@ -42,9 +49,9 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   }
 
   @Override
-  public List<E74_Group> getE74ByName(String groupName) {
+  public List<GetIdAndNameOnly> getE74ContainsName(String groupName) {
 
-    return groupRepo.findByNameContainsIgnoreCase(groupName);
+    return groupRepo.findContainsName(groupName);
   }
 
   @Override

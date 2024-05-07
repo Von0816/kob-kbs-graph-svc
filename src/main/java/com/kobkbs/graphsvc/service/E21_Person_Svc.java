@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.kobkbs.graphsvc.model.E21_Person;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E21_Person_Svc {
 
   List<E21_Person> getAllE21();
+  List<E21_Person> getE21ByName(String name);
   List<E21_Person> getE21ByParentName(String parentName);
   List<E21_Person> getE21ByRightName(String rightName);
   List<E21_Person> getE21ByResidenceName(String residenceName);
-  List<E21_Person> getE21ByName(String personName);
+  List<GetIdAndNameOnly> getE21ContainsName(String personName);
   Optional<E21_Person> getE21ById(String personId);
   void createE21(String personName);
   void createP152(String personId, String parentId);

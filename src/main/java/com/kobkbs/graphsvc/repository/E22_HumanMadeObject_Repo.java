@@ -1,19 +1,24 @@
 package com.kobkbs.graphsvc.repository;
 
 import java.util.List;
+
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeObject, String> {
-  List<E22_HumanMadeObject> findByNameContainsIgnoreCase(String hmoName);
-  List<E22_HumanMadeObject> findByType(String hmoType);
+  List<E22_HumanMadeObject> findByName(String name);
+  List<E22_HumanMadeObject> findByType(String type);
   List<E22_HumanMadeObject> findByCurrPermaLocName(String currPermaLocName);
   List<E22_HumanMadeObject> findByCurrLocName(String currLocName);
   List<E22_HumanMadeObject> findByOwnerPersonName(String ownerPersonName);
   List<E22_HumanMadeObject> findByOwnerGroupName(String ownerGroupName);
+
+  @Query("MATCH (n:E22_HumanMadeObject WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
+  List<GetIdAndNameOnly> findContainsName(String name);
 
   @Query("MATCH (hmo:E22_HumanMadeObject {id: $hmoId})-[:P54_HAS_CURRENT_PERMANENT_LOCATION]->(:E53_Place {id: $placeId}) RETURN hmo")
   List<E22_HumanMadeObject> findP54(@Param("hmoId") String hmoId, @Param("placeId") String placeId);

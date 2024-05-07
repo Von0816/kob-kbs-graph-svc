@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E21_Person;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E30_Right_Repo;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
@@ -33,6 +34,11 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
+  public List<E21_Person> getE21ByName(String name) {
+    return personRepo.findByName(name);
+  }
+
+  @Override
   public List<E21_Person> getE21ByParentName(String parentName) {
 
     return personRepo.findByParentName(parentName);
@@ -57,9 +63,9 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
-  public List<E21_Person> getE21ByName(String personName) {
+  public List<GetIdAndNameOnly> getE21ContainsName(String personName) {
 
-    return personRepo.findByNameContainsIgnoreCase(personName);
+    return personRepo.findContainsName(personName);
   }
 
   //Create node

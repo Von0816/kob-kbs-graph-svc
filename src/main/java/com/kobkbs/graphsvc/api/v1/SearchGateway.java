@@ -42,27 +42,27 @@ public class SearchGateway {
 
     List<SearchGateway_DTO> entityList = new ArrayList<SearchGateway_DTO>(); 
 
-    eventSvc.getE5ByName(name).forEach(entity -> {
+    eventSvc.getE5ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E5 Event", "e5-event", entity.getId(), entity.getName()));
     });;
 
-    personSvc.getE21ByName(name).forEach(entity -> {
+    personSvc.getE21ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E21 Person", "e21-person", entity.getId(), entity.getName()));
     });;
 
-    hmoSvc.getE22ByName(name).forEach(entity -> {
+    hmoSvc.getE22ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E22 Human Made Object", "e22-hmo", entity.getId(), entity.getName()));
     });;
 
-    rightSvc.getE30ByName(name).forEach(entity -> {
+    rightSvc.getE30ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E30 Right", "e30-right", entity.getId(), entity.getName()));
     });;
 
-    placeSvc.getE53ByName(name).forEach(entity -> {
+    placeSvc.getE53ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E53 Place", "e53-place", entity.getId(), entity.getName()));
     });;
 
-    groupSvc.getE74ByName(name).forEach(entity -> {
+    groupSvc.getE74ContainsName(name).forEach(entity -> {
       entityList.add(new SearchGateway_DTO("E74 Group", "e74-group", entity.getId(), entity.getName()));
     });;
 

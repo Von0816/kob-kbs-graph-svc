@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E5_Event;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
 import com.kobkbs.graphsvc.repository.E5_Event_Repo;
@@ -36,6 +37,12 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   }
 
   @Override
+  public List<E5_Event> getE5ByName(String name) {
+
+    return eventRepo.findByName(name);
+  }
+
+  @Override
   public List<E5_Event> getE5ByLocationName(String placeName) {
 
     return eventRepo.findByLocationName(placeName);
@@ -60,9 +67,9 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   }
 
   @Override
-  public List<E5_Event> getE5ByName(String eventName) {
+  public List<GetIdAndNameOnly> getE5ContainsName(String eventName) {
 
-    return eventRepo.findByNameContainsIgnoreCase(eventName);
+    return eventRepo.findContainsName(eventName);
   }
 
   @Override

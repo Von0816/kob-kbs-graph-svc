@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.api.v1;
 
 import com.kobkbs.graphsvc.model.E21_Person;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.service.E21_Person_SvcImp;
 
 import lombok.RequiredArgsConstructor;
