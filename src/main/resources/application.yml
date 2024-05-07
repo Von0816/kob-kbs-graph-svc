@@ -11,7 +11,7 @@ spring:
       password: ${N4J_INSTANCE_PASS} 
   data:
     redis:
-      url: ${REDIS_URL}
+      url: ${REDISCLOUD_URL}
   # security:
   #   oauth2:
   #     client:
