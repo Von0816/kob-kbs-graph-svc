@@ -5,10 +5,12 @@ import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/e74-group")
 @RequiredArgsConstructor
-public class E74_Group_API {
+public class E74_Group_API implements Serializable{
   
   private final E74_Group_SvcImp groupSvc;
 
@@ -32,6 +34,7 @@ public class E74_Group_API {
     return groupSvc.getE74ByMemberName(memberName);
   }
 
+  @Cacheable(value = "groupCache")
   @GetMapping("/id/{groupId}")
   public Optional<E74_Group> GetE74GroupById(@PathVariable String groupId) {
 

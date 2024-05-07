@@ -5,10 +5,12 @@ import com.kobkbs.graphsvc.service.E5_Event_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +20,7 @@ import java.util.stream.Stream;
 @RestController
 @RequestMapping("/v1/e5-event")
 @RequiredArgsConstructor
-public class E5_Event_API {
+public class E5_Event_API implements Serializable{
   
   private final E5_Event_SvcImp eventSvc;
 
@@ -28,6 +30,7 @@ public class E5_Event_API {
       return eventSvc.getAllE5();
   }
 
+  @Cacheable(value = "eventCache")
   @GetMapping("/id/{eventId}")
   public Optional<E5_Event> GetE5EventById(@PathVariable String eventId) {
 

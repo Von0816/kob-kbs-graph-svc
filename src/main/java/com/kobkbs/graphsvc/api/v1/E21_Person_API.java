@@ -9,12 +9,15 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "personCache")
 @RestController
 @RequestMapping("/v1/e21-person")
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class E21_Person_API {
       return personSvc.getAllE21();
   }
 
+  @Cacheable(key = "#personId")
   @GetMapping("/id/{personId}")
   public Optional<E21_Person> GetE21ById(@PathVariable String personId) {
 

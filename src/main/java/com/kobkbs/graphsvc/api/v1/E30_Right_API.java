@@ -5,6 +5,8 @@ import com.kobkbs.graphsvc.service.E30_Right_Svc;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "rightCache")
 @RestController
 @RequestMapping("/v1/e30-right")
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class E30_Right_API {
     return rightSvc.getAllE30();
   }
 
+  @Cacheable(key = "#rightId")
   @GetMapping("/id/{rightId}")
   public Optional<E30_Right> GetE30RightById(@PathVariable String rightId) {
 

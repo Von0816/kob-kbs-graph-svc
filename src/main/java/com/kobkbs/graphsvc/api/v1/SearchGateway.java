@@ -3,9 +3,10 @@ package com.kobkbs.graphsvc.api.v1;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,7 @@ import com.kobkbs.graphsvc.dto.SearchGateway_DTO;
 import com.kobkbs.graphsvc.service.E21_Person_SvcImp;
 import com.kobkbs.graphsvc.service.E22_HumanMadeObject_SvcImp;
 import com.kobkbs.graphsvc.service.E30_Right_SvcImp;
-import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
+// import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 import com.kobkbs.graphsvc.service.E53_Place_SvcImp;
 import com.kobkbs.graphsvc.service.E5_Event_SvcImp;
 import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
@@ -23,19 +24,21 @@ import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "searchResult")
 @RestController
 @RequestMapping("/v1/search")
 @RequiredArgsConstructor
-public class SearchGateway {
+public class SearchGateway{
 
   private final E5_Event_SvcImp eventSvc;
   private final E21_Person_SvcImp personSvc;
   private final E22_HumanMadeObject_SvcImp hmoSvc;
   private final E30_Right_SvcImp rightSvc;
-  private final E52_TimeSpan_SvcImp timeSpanSvc;
+  // private final E52_TimeSpan_SvcImp timeSpanSvc;
   private final E53_Place_SvcImp placeSvc;
   private final E74_Group_SvcImp groupSvc;
 
+  @Cacheable(key = "#name")
   @GetMapping
   @ResponseBody
   public List<SearchGateway_DTO> getAll(@RequestParam String name) {

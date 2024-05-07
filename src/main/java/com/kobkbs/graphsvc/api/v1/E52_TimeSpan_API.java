@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,7 @@ import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "tsCache")
 @RestController
 @RequestMapping("/v1/e52-time-span")
 @RequiredArgsConstructor
@@ -36,6 +39,7 @@ public class E52_TimeSpan_API {
     return timeSpanSvc.getAllE52();
   } 
 
+  @Cacheable(key = "#timeSpanId")
   @GetMapping("/id/{timeSpanId}")
   public Optional<E52_TimeSpan> GetE52ById(@PathVariable String timeSpanId) {
 

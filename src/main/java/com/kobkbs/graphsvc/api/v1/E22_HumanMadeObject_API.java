@@ -6,6 +6,8 @@ import com.kobkbs.graphsvc.dto.E22_HumanMadeObject_DTO;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "hmoCache")
 @RestController
 @RequestMapping("/v1/e22-hmo")
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class E22_HumanMadeObject_API {
       return hmoSvc.getAllE22();
   }
 
+  @Cacheable(key = "#hmoId")
   @GetMapping("/id/{hmoId}")
   public Optional<E22_HumanMadeObject> GetE22HMOById(@PathVariable String hmoId) {
 

@@ -5,6 +5,8 @@ import com.kobkbs.graphsvc.service.E53_Place_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
+@CacheConfig(cacheNames = "placeCache")
 @RestController
 @RequestMapping("/v1/e53-place")
 @RequiredArgsConstructor
@@ -26,6 +29,7 @@ public class E53_Place_API {
     return placeSvc.getAllE53();
   }
 
+  @Cacheable(key = "#placeId")
   @GetMapping("/id/{placeId}")
   public Optional<E53_Place> GetE53PlaceById(@PathVariable String placeId) {
 
