@@ -35,11 +35,6 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
   }
 
   @Override
-  public List<E22_HumanMadeObject> getE22ByName(String name) {
-    return humanMadeObjectRepo.findByName(name);
-  }
-
-  @Override
   public List<E22_HumanMadeObject> getE22ByType(String hmoType) {
 
     return humanMadeObjectRepo.findByType(hmoType);
@@ -76,7 +71,7 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
   }
 
   @Override
-  public List<GetIdAndNameOnly> getE22ContainsName(String hmoName) {
+  public List<GetIdAndNameOnly> searchE22(String hmoName) {
 
     return humanMadeObjectRepo.findContainsName(hmoName);
   }

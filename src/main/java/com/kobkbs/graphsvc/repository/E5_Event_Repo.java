@@ -1,7 +1,7 @@
 package com.kobkbs.graphsvc.repository;
 
 import java.util.List;
-import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -11,11 +11,13 @@ import com.kobkbs.graphsvc.model.E5_Event;
 import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
-  List<E5_Event> findByName(String name);
   List<E5_Event> findByLocationName(String placeName);
   List<E5_Event> findByParticipantPersonName(String personName);
   List<E5_Event> findByParticipantGroupName(String groupName);
-  List<E5_Event> findByTimeSpan(LocalDate date);
+  List<E5_Event> findByTimeSpan(String tsName);
+
+  // @Query("MATCH (n:E5_Event {id: $id}) WITH n MATCH (n)->[:P4_HAS_TIME_SPAN]->(ts:E52_TimeSpan) return n, ts AS timeSpan")
+  // Optional<E5_Event> findById(@Param("id") String id);
 
   @Query("MATCH (n:E5_Event WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);
@@ -49,7 +51,7 @@ public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
   @Query("MATCH (event:E5_Event {id: $eventId}) WITH event MATCH (group:E74_Group {id: $groupId}) MERGE (event)-[:P11_HAD_PARTICIPANT]->(group)")
   void createP11G(@Param("eventId") String eventId, @Param("groupId") String groupId);
 
-  //create P4
+  //create P4_HAS_TIME_SPAN
   @Query("MATCH (event:E5_Event {id: $eventId}) WITH event MATCH (timeSpan:E52_TimeSpan {id: $timeSpanId}) MERGE (event)-[:P4_HAS_TIME_SPAN]->(timeSpan)")
   void createP4(@Param("eventId") String eventId, @Param("timeSpanId") String timeSpanId);
 
@@ -65,6 +67,7 @@ public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
   @Query("MATCH (:E5_Event {id: $eventId})-[r:P11_HAD_PARTICIPANT]->(:E74_Group {id: $groupId}) DELETE r")
   void deleteP11G(@Param("eventId") String eventId, @Param("groupId") String groupId);
 
+  //delte P4_HAS_TIME_SPAN
   @Query("MATCH (:E5_Event {id: $eventId})-[r:P4_HAS_TIME_SPAN]->(:E52_TimeSpan {id: $timeSpanId}) DELETE r")
   void deleteP4(@Param("eventId") String eventId, @Param("timeSpanId") String timeSpanId);
 }

@@ -1,17 +1,17 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E5_Event;
 import com.kobkbs.graphsvc.service.E5_Event_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -37,12 +37,6 @@ public class E5_Event_API implements Serializable{
     return eventSvc.getE5ById(eventId);
   }
 
-  @GetMapping("/name/{eventName}")
-  public List<E5_Event> GetE5ByName(@PathVariable String eventName) {
-
-    return eventSvc.getE5ByName(eventName);
-  }
-
   @GetMapping("/p7/{placeName}")
   public List<E5_Event> GetE5ByLocationName(@PathVariable String placeName) {
 
@@ -57,10 +51,10 @@ public class E5_Event_API implements Serializable{
     return newList;
   }
 
-  @GetMapping("/p4/{date}")
-  public List<E5_Event> GetE5ByDate(@PathVariable LocalDate date) {
+  @GetMapping("/p4/{tsName}")
+  public List<E5_Event> GetE5ByDate(@PathVariable String tsName) {
 
-    return eventSvc.getE5ByTimeSpan(date);
+    return eventSvc.getE5ByTimeSpan(tsName);
   }
 
   @PostMapping
@@ -103,7 +97,8 @@ public class E5_Event_API implements Serializable{
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/{event_id}")
+  @CachePut(key = "#eventId")
+  @PutMapping("/{eventId}")
   public ResponseEntity<String> UpdateE5Event(@PathVariable String eventId, @RequestBody String newName) {
 
     eventSvc.updateE5Name(eventId, newName);
@@ -111,7 +106,8 @@ public class E5_Event_API implements Serializable{
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @DeleteMapping("/{event_id}")
+  @CachePut(key = "#eventId")
+  @DeleteMapping("/{eventId}")
   public ResponseEntity<String> DeleteE5Event(@PathVariable String eventId) {
 
     eventSvc.deleteE5ById(eventId);

@@ -28,18 +28,13 @@ public class E30_Right_SvcImp implements E30_Right_Svc {
   }
 
   @Override
-  public List<E30_Right> getE30ByName(String name) {
-    return rightRepo.findByName(name);
-  }
-
-  @Override
   public Optional<E30_Right> getE30ById(String rightId) {
 
     return rightRepo.findById(rightId);
   }
 
   @Override
-  public List<GetIdAndNameOnly> getE30ContainsName(String rightName) {
+  public List<GetIdAndNameOnly> searchE30(String rightName) {
 
     return rightRepo.findContainsName(rightName);
   }

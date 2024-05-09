@@ -31,12 +31,6 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   }
 
   @Override
-  public List<E74_Group> getE74ByName(String name) {
-
-    return groupRepo.findByName(name);
-  }
-
-  @Override
   public List<E74_Group> getE74ByMemberName(String memberName) {
 
     return groupRepo.findByMemberName(memberName);
@@ -49,7 +43,7 @@ public class E74_Group_SvcImp implements E74_Group_Svc{
   }
 
   @Override
-  public List<GetIdAndNameOnly> getE74ContainsName(String groupName) {
+  public List<GetIdAndNameOnly> searchE74(String groupName) {
 
     return groupRepo.findContainsName(groupName);
   }

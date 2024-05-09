@@ -1,10 +1,12 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E74_Group;
 import com.kobkbs.graphsvc.service.E74_Group_SvcImp;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +43,6 @@ public class E74_Group_API implements Serializable{
     return groupSvc.getE74ById(groupId);
   }
 
-  @GetMapping("/name/{groupName}")
-  public List<E74_Group> GetE74ByName(@PathVariable String groupName) {
-
-    return groupSvc.getE74ByName(groupName);
-  }
-
   @PostMapping
   public ResponseEntity<String> CreateE74(@RequestBody String groupName) {
 
@@ -63,6 +59,7 @@ public class E74_Group_API implements Serializable{
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  @CachePut(key = "#groupId")
   @PutMapping("/{groupId}")
   public ResponseEntity<String> UpdateE74(@PathVariable String groupId, @RequestBody String newName) {
 
@@ -71,6 +68,7 @@ public class E74_Group_API implements Serializable{
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
+  @CacheEvict(key = "#groupId")
   @DeleteMapping("/{groupId}")
   public ResponseEntity<String> DeleteE74Group(@PathVariable String groupId) {
 

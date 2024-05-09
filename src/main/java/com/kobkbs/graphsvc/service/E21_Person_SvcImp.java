@@ -34,11 +34,6 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
-  public List<E21_Person> getE21ByName(String name) {
-    return personRepo.findByName(name);
-  }
-
-  @Override
   public List<E21_Person> getE21ByParentName(String parentName) {
 
     return personRepo.findByParentName(parentName);
@@ -63,7 +58,7 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
   }
 
   @Override
-  public List<GetIdAndNameOnly> getE21ContainsName(String personName) {
+  public List<GetIdAndNameOnly> searchE21(String personName) {
 
     return personRepo.findContainsName(personName);
   }

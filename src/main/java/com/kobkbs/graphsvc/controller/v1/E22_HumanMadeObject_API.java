@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 import com.kobkbs.graphsvc.service.E22_HumanMadeObject_SvcImp;
@@ -36,12 +36,6 @@ public class E22_HumanMadeObject_API {
   public Optional<E22_HumanMadeObject> GetE22HMOById(@PathVariable String hmoId) {
 
     return hmoSvc.getE22ById(hmoId);
-  }
-
-  @GetMapping("/name/{hmoName}")
-  public List<E22_HumanMadeObject> GetE22ByHMOName(@PathVariable String hmoName) {
-
-    return hmoSvc.getE22ByName(hmoName);
   }
 
   @GetMapping("/type/{hmoType}")

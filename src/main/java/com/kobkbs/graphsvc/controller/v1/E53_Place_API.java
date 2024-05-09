@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E53_Place;
 import com.kobkbs.graphsvc.service.E53_Place_SvcImp;
@@ -6,6 +6,8 @@ import com.kobkbs.graphsvc.service.E53_Place_SvcImp;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +38,6 @@ public class E53_Place_API {
     return placeSvc.getE53ById(placeId);
   }
 
-  @GetMapping("/name/{placeName}")
-  public List<E53_Place> GetE53ByPlaceName(@PathVariable String placeName) {
-
-    return placeSvc.getE53ByName(placeName);
-  }
-
   @PostMapping
   public ResponseEntity<String> CreateE53Place(@RequestBody String placeName) {
 
@@ -50,6 +46,7 @@ public class E53_Place_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  @CachePut(key = "#placeId")
   @PutMapping("/{placeId}")
   public ResponseEntity<String> UpdateE53Place(@PathVariable String placeId, @RequestBody String newName) {
 
@@ -58,6 +55,7 @@ public class E53_Place_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
+  @CacheEvict(key = "#placeId")
   @DeleteMapping("/{placeId}")
   public ResponseEntity<String> DeleteE53Place(@PathVariable String placeId) {
 

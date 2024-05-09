@@ -2,7 +2,7 @@ package com.kobkbs.graphsvc.dto;
 
 import java.io.Serializable;
 
-public record SearchGateway_DTO(
+public record Search_DTO(
     String label,
     String requestMapping,
     String id,

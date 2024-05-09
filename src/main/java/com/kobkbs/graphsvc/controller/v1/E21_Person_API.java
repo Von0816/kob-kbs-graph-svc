@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E21_Person;
 import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
@@ -38,12 +38,6 @@ public class E21_Person_API {
     return personSvc.getE21ById(personId);
   }
 
-  @GetMapping("/name/{personName}")
-  public List<E21_Person> GetE21ByName(@PathVariable String personName) {
-
-    return personSvc.getE21ByName(personName);
-  }
-
   @GetMapping("/p152/{parentName}")
   public List<E21_Person> GetE21ByParentName(@PathVariable String parentName) {
 
@@ -54,12 +48,6 @@ public class E21_Person_API {
   public List<E21_Person>  GetE21ByResidenceName(@PathVariable String residenceName) {
 
     return personSvc.getE21ByResidenceName(residenceName);
-  }
-
-  @GetMapping("/p30/{rightName}")
-  public List<E21_Person> GetE21ByRightName(@PathVariable String rightName) {
-
-    return personSvc.getE21ByRightName(rightName);
   }
 
   @PostMapping

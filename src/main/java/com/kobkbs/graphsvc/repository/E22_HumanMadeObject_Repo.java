@@ -1,6 +1,7 @@
 package com.kobkbs.graphsvc.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -10,12 +11,14 @@ import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeObject, String> {
-  List<E22_HumanMadeObject> findByName(String name);
   List<E22_HumanMadeObject> findByType(String type);
   List<E22_HumanMadeObject> findByCurrPermaLocName(String currPermaLocName);
   List<E22_HumanMadeObject> findByCurrLocName(String currLocName);
   List<E22_HumanMadeObject> findByOwnerPersonName(String ownerPersonName);
   List<E22_HumanMadeObject> findByOwnerGroupName(String ownerGroupName);
+
+  @Query("MATCH (n:E22_HumanMadeObject {id: $id}) RETURN n")
+  Optional<E22_HumanMadeObject> findById(@Param("id") String id);
 
   @Query("MATCH (n:E22_HumanMadeObject WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);

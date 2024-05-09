@@ -21,11 +21,8 @@ import lombok.Getter;
 public class E52_TimeSpan implements Serializable{
 
   @Id @GeneratedValue(generatorClass = UUIDStringGenerator.class) private String id;
-  private String type;
-  private String year;
-  private int month;
-  private int day;
- 
+  private String name;
+
   @Relationship(type = "P86_FALLS_WITHIN")
   private Set<E52_TimeSpan> fallsWithin;
 }

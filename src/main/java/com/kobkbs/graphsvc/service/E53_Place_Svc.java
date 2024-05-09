@@ -9,8 +9,7 @@ import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 public interface E53_Place_Svc {
 
   List<E53_Place> getAllE53();
-  List<E53_Place> getE53ByName(String name);
-  List<GetIdAndNameOnly> getE53ContainsName(String placeName);
+  List<GetIdAndNameOnly> searchE53(String placeName);
   Optional<E53_Place> getE53ById(String placeId);
   void createE53(String placeName);
   void updateE53Name(String placeId, String newName);

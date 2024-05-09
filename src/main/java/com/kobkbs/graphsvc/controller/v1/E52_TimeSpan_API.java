@@ -1,10 +1,11 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.kobkbs.graphsvc.dto.E52_TimeSpan_DTO;
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
 import com.kobkbs.graphsvc.service.E52_TimeSpan_SvcImp;
 
@@ -46,34 +46,10 @@ public class E52_TimeSpan_API {
     return timeSpanSvc.getE52ById(timeSpanId);
   }
 
-  @GetMapping("/year/{year}")
-  public List<E52_TimeSpan> GetE52ByYear(@PathVariable String year) {
-
-    return timeSpanSvc.getE52ByYear(year);
-  }
-
-  @GetMapping("/month/{month}")
-  public List<E52_TimeSpan> GetE52ByMonth(@PathVariable int month) {
-
-    return timeSpanSvc.getE52ByMonth(month);
-  }
-
-  @GetMapping("/datetime/{dateTime}")
-  public E52_TimeSpan GetE52ByDate(@PathVariable LocalDate dateTime) {
-
-    return timeSpanSvc.getE52ByDate(dateTime);
-  }
-
-  @GetMapping("/p86/{fallsWithinDT}")
-  public List<E52_TimeSpan> GetE52ByFallsWithin(@PathVariable LocalDate fallsWithinDT) {
-
-    return timeSpanSvc.getE52ByFallsWithin(fallsWithinDT);
-  }
-
   @PostMapping
-  public ResponseEntity<String> CreateE52(@RequestBody E52_TimeSpan_DTO timeSpanDTO) {
+  public ResponseEntity<String> CreateE52(@RequestBody String timeSpanName) {
 
-    timeSpanSvc.createE52(timeSpanDTO);
+    timeSpanSvc.createE52(timeSpanName);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
@@ -86,14 +62,16 @@ public class E52_TimeSpan_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  @CachePut(key = "#timeSpanId")
   @PutMapping("/{timeSpanId}")
-  public ResponseEntity<String> UpdateE52Date(@PathVariable String timeSpanId, @RequestBody E52_TimeSpan_DTO timeSpanDTO) {
+  public ResponseEntity<String> UpdateE52Date(@PathVariable String timeSpanId, @RequestBody String newName) {
 
-    timeSpanSvc.updateE52Date(timeSpanId, timeSpanDTO);
+    timeSpanSvc.updateE52Date(timeSpanId, newName);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
+  @CacheEvict(key = "#timeSpanId")
   @DeleteMapping("/{timeSpanId}")
   public ResponseEntity<String> DeleteE52ById(@PathVariable String timeSpanId) {
 

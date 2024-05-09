@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.kobkbs.graphsvc.dto.E52_TimeSpan_DTO;
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
+import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E52_TimeSpan_Repo;
 
 import lombok.RequiredArgsConstructor;
@@ -37,50 +38,21 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   }
 
   @Override
-  public E52_TimeSpan getE52ByDate(LocalDate dateTime) {
+  public List<GetIdAndNameOnly> searchE52(String tsName) {
 
-    return timeSpanRepo.findE52ByDate(dateTime);
+    return timeSpanRepo.findContainsName(tsName);
   }
 
   @Override
-  public List<E52_TimeSpan> getE52ByFallsWithin(LocalDate fallsWithinDate) {
-
-    return timeSpanRepo.findE52ByFallsWithin(fallsWithinDate);
+  public void createE52(String timeSpanName) {
+      timeSpanRepo.save(E52_TimeSpan.builder().name(timeSpanName).build());
   }
 
   @Override
-  public List<E52_TimeSpan> getE52ByYear(String year) {
-
-    return timeSpanRepo.findE52ByYear(year);
-  }
-
-  @Override
-  public List<E52_TimeSpan> getE52ByMonth(int month) {
-
-    return timeSpanRepo.findE52ByMonth(month);
-  }
-
-  @Override
-  public void createE52(E52_TimeSpan_DTO timeSpanDTO) {
-      timeSpanRepo.save(E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).day(timeSpanDTO.day()).month(timeSpanDTO.month()).build());
-    // else if(timeSpanDTO.month() < 0 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 0 || timeSpanDTO.day() > 31) {
-    //   throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
-    // }
-    // else {
-    //   timeSpanRepo.save(E52_TimeSpan.builder().type(timeSpanDTO.type()).year(timeSpanDTO.year()).month(timeSpanDTO.month()).day(timeSpanDTO.day()).build());
-    // }
-  }
-
-  @Override
-  public void updateE52Date(String timeSpanId, E52_TimeSpan_DTO timeSpanDTO) {
+  public void updateE52Date(String timeSpanId, String newName) {
 
     if(timeSpanRepo.existsById(timeSpanId)) {
-      if(timeSpanDTO.month() < 1 || timeSpanDTO.month() > 12 || timeSpanDTO.day() < 1 || timeSpanDTO.day() > 31) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid date.");
-      }
-      else {
-      timeSpanRepo.updateE52Date(timeSpanId, timeSpanDTO.type(), timeSpanDTO.year(), timeSpanDTO.month(), timeSpanDTO.day());
-      }
+      timeSpanRepo.updateE52Date(timeSpanId, newName);
     }
     else {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "E52 Time-span with id: " + timeSpanId + " does not exist.");

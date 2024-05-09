@@ -9,9 +9,8 @@ import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 public interface E74_Group_Svc {
 
   List<E74_Group> getAllE74();
-  List<E74_Group> getE74ByName(String name);
   List<E74_Group> getE74ByMemberName(String memberName);
-  List<GetIdAndNameOnly> getE74ContainsName(String groupName);
+  List<GetIdAndNameOnly> searchE74(String groupName);
   Optional<E74_Group> getE74ById(String groupId);
   void createE74(String groupName);
   void createP107(String groupId, String personId);

@@ -8,7 +8,6 @@ import com.kobkbs.graphsvc.repository.E5_Event_Repo;
 import com.kobkbs.graphsvc.repository.E74_Group_Repo;
 import com.kobkbs.graphsvc.repository.E52_TimeSpan_Repo;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,12 +36,6 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   }
 
   @Override
-  public List<E5_Event> getE5ByName(String name) {
-
-    return eventRepo.findByName(name);
-  }
-
-  @Override
   public List<E5_Event> getE5ByLocationName(String placeName) {
 
     return eventRepo.findByLocationName(placeName);
@@ -61,13 +54,13 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   }
 
   @Override
-  public List<E5_Event> getE5ByTimeSpan(LocalDate date) {
+  public List<E5_Event> getE5ByTimeSpan(String tsName) {
 
-    return eventRepo.findByTimeSpan(date);
+    return eventRepo.findByTimeSpan(tsName);
   }
 
   @Override
-  public List<GetIdAndNameOnly> getE5ContainsName(String eventName) {
+  public List<GetIdAndNameOnly> searchE5(String eventName) {
 
     return eventRepo.findContainsName(eventName);
   }

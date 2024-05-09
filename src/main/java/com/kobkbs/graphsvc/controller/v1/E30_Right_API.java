@@ -1,4 +1,4 @@
-package com.kobkbs.graphsvc.api.v1;
+package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E30_Right;
 import com.kobkbs.graphsvc.service.E30_Right_Svc;
@@ -6,6 +6,8 @@ import com.kobkbs.graphsvc.service.E30_Right_Svc;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +37,6 @@ public class E30_Right_API {
     return rightSvc.getE30ById(rightId);
   }
 
-  @GetMapping("/name/{rightName}")
-  public List<E30_Right> GetE30RightByName(@PathVariable String rightName) {
-
-    return rightSvc.getE30ByName(rightName);
-  }
-
   @PostMapping
   public ResponseEntity<String> CreateE30(@RequestBody String rightName) {
 
@@ -49,6 +45,7 @@ public class E30_Right_API {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  @CachePut(key = "#rightId")
   @PutMapping("/{rightId}")
   public ResponseEntity<String> UpdateE30Name(@PathVariable String rightId, @RequestBody String newName) {
 
@@ -57,6 +54,7 @@ public class E30_Right_API {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
+  @CacheEvict(key = "#rightId")
   @DeleteMapping("/{rightId}")
   public ResponseEntity<String> DeleteE30Right(@PathVariable String rightId) {
 
