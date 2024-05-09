@@ -17,8 +17,8 @@ public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeO
   List<E22_HumanMadeObject> findByOwnerPersonName(String ownerPersonName);
   List<E22_HumanMadeObject> findByOwnerGroupName(String ownerGroupName);
 
-  @Query("MATCH (n:E22_HumanMadeObject {id: $id}) RETURN n")
-  Optional<E22_HumanMadeObject> findById(@Param("id") String id);
+  // @Query("MATCH (n:E22_HumanMadeObject {id: $id}) RETURN n")
+  // Optional<E22_HumanMadeObject> findById(@Param("id") String id);
 
   @Query("MATCH (n:E22_HumanMadeObject WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);

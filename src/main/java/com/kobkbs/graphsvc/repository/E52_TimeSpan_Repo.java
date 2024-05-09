@@ -14,8 +14,8 @@ public interface E52_TimeSpan_Repo extends Neo4jRepository<E52_TimeSpan, String>
   @Query("MATCH (n:E52_TimeSpan) return n")
   List<E52_TimeSpan> findAllE52();
 
-  @Query("MATCH (n:E52_TimeSpan {id: $id}) return n")
-  Optional<E52_TimeSpan> findById(@Param("id") String id);
+  // @Query("MATCH (n:E52_TimeSpan {id: $id}) return n")
+  // Optional<E52_TimeSpan> findById(@Param("id") String id);
 
   @Query("MATCH (n:E52_TimeSpan WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);

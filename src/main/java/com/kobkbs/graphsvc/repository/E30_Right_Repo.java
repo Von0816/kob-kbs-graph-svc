@@ -12,8 +12,8 @@ import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E30_Right_Repo extends Neo4jRepository<E30_Right, String> {
 
-  @Query("MATCH (n:E30_Right {id: $id}) RETURN n")
-  Optional<E30_Right> findById(@Param("id") String id);
+  // @Query("MATCH (n:E30_Right {id: $id}) RETURN n")
+  // Optional<E30_Right> findById(@Param("id") String id);
 
   @Query("MATCH (n:E30_Right WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);

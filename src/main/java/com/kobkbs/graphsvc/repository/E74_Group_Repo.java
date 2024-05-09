@@ -13,8 +13,8 @@ import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 public interface E74_Group_Repo extends Neo4jRepository<E74_Group, String> {
   List<E74_Group> findByMemberName(String memberName);
 
-  @Query("MATCH (n:E74_Group {id: $id}) RETURN n")
-  Optional<E74_Group> findById(@Param("id") String id);
+  // @Query("MATCH (n:E74_Group {id: $id}) RETURN n")
+  // Optional<E74_Group> findById(@Param("id") String id);
 
   @Query("MATCH (n:E74_Group WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
   List<GetIdAndNameOnly> findContainsName(String name);
