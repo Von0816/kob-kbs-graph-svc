@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @CacheConfig(cacheNames = "rightCache")
 @RestController
-@RequestMapping("/v1/e30-right")
+@RequestMapping("/api/v1/e30-right")
 @RequiredArgsConstructor
 public class E30_Right_API {
   

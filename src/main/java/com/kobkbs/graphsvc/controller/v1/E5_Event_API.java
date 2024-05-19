@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @RestController
-@RequestMapping("/v1/e5-event")
+@RequestMapping("/api/v1/e5-event")
 @RequiredArgsConstructor
 public class E5_Event_API implements Serializable{
   

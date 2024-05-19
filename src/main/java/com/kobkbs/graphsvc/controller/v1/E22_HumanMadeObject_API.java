@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @CacheConfig(cacheNames = "hmoCache")
 @RestController
-@RequestMapping("/v1/e22-hmo")
+@RequestMapping("/api/v1/e22-hmo")
 @RequiredArgsConstructor
 public class E22_HumanMadeObject_API {
   

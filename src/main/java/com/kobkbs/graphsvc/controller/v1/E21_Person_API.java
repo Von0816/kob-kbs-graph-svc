@@ -1,7 +1,6 @@
 package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E21_Person;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.service.E21_Person_SvcImp;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @CacheConfig(cacheNames = "personCache")
 @RestController
-@RequestMapping("/v1/e21-person")
+@RequestMapping("/api/v1/e21-person")
 @RequiredArgsConstructor
 public class E21_Person_API {
   

@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @CacheConfig(cacheNames = "searchResult")
 @RestController
-@RequestMapping("/v1/search")
+@RequestMapping("/api/v1/search")
 @RequiredArgsConstructor
 public class Search{
 

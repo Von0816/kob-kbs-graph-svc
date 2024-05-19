@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @CacheConfig(cacheNames = "tsCache")
 @RestController
-@RequestMapping("/v1/e52-time-span")
+@RequestMapping("/api/v1/e52-time-span")
 @RequiredArgsConstructor
 public class E52_TimeSpan_API {
 

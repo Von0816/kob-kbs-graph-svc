@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "https://kob-kbs-react-5e24760e9974.herokuapp.com")
 @RestController
-@RequestMapping("/v1/e74-group")
+@RequestMapping("/api/v1/e74-group")
 @RequiredArgsConstructor
 public class E74_Group_API implements Serializable{
   
