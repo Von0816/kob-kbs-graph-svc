@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class AuthenticationService {
 
-  private static final String AUTH_TOKEN_HEADER_NAME = "API-KEY";
+  private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
   //Don't forgert to change auth token for prod
   private static final String AUTH_TOKEN = System.getenv("API_KEY");
 
