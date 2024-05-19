@@ -12,22 +12,6 @@ spring:
   data:
     redis:
       url: ${REDISCLOUD_URL}
-  # security:
-  #   oauth2:
-  #     client:
-  #       registration:
-  #         keycloak:
-  #           client-id: kob-kbs
-  #           client-secret: ${KC_CLIENT_SECRET}
-  #           authorization-grant-type: authorization_code
-  #           scope: openid
-  #       provider:
-  #         keycloak:
-  #           issuer-uri: http://localhost:8080/realms/spring-boot
-  #           user-name-attribute: preferred_username
-  #     resourceserver:
-  #       jwt:
-  #         issuer-uri: http://localhost:8080/realms/spring-boot
 springdoc:
   api-docs:
     path: /api
