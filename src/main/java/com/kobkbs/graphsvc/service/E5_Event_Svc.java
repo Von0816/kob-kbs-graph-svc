@@ -1,11 +1,9 @@
 package com.kobkbs.graphsvc.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import com.kobkbs.graphsvc.model.E5_Event;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E5_Event_Svc {
 
@@ -14,7 +12,6 @@ public interface E5_Event_Svc {
   List<E5_Event> getE5ByParticipantPersonName(String personName);
   List<E5_Event> getE5ByParticipantGroupName(String groupName);
   List<E5_Event> getE5ByTimeSpan(String tsName);
-  List<GetIdAndNameOnly> searchE5(String eventName);
   Optional<E5_Event> getE5ById(String eventId);
   void createE5(String eventName);
   void createP7(String eventId, String placeId);

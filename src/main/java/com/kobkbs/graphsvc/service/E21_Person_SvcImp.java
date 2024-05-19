@@ -1,7 +1,6 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E21_Person;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E30_Right_Repo;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
@@ -57,14 +56,7 @@ public class E21_Person_SvcImp implements E21_Person_Svc{
     return personRepo.findById(personId);
   }
 
-  @Override
-  public List<GetIdAndNameOnly> searchE21(String personName) {
-
-    return personRepo.findContainsName(personName);
-  }
-
   //Create node
-
   @Override
   public void createE21(String personName) {
     personRepo.save(E21_Person.builder().name(personName).build());

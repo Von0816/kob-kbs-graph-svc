@@ -1,8 +1,6 @@
 package com.kobkbs.graphsvc.service;
 
-import com.kobkbs.graphsvc.dto.E22_HumanMadeObject_DTO;
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E22_HumanMadeObject_Repo;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
@@ -71,15 +69,9 @@ public class E22_HumanMadeObject_SvcImp implements E22_HumanMadeObject_Svc{
   }
 
   @Override
-  public List<GetIdAndNameOnly> searchE22(String hmoName) {
+  public void createE22(String name, String type) {
 
-    return humanMadeObjectRepo.findContainsName(hmoName);
-  }
-
-  @Override
-  public void createE22(E22_HumanMadeObject_DTO hmoDTO) {
-
-    humanMadeObjectRepo.save(E22_HumanMadeObject.builder().name(hmoDTO.name()).type(hmoDTO.type()).build());
+    humanMadeObjectRepo.save(E22_HumanMadeObject.builder().name(name).type(type).build());
   }
 
   @Override

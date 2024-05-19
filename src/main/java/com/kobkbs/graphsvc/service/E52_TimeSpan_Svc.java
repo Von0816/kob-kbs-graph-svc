@@ -4,13 +4,11 @@ import java.util.Optional;
 import java.util.List;
 
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E52_TimeSpan_Svc {
 
   List<E52_TimeSpan> getAllE52();
   Optional<E52_TimeSpan> getE52ById(String timeSpanId);
-  List<GetIdAndNameOnly> searchE52(String name);
   void createE52(String timeSpanName);
   void createP86(String childTSID, String parentTSID);
   void updateE52Date(String timeSpanId, String newName);

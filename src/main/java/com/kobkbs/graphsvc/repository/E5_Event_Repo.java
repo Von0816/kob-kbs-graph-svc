@@ -19,9 +19,6 @@ public interface E5_Event_Repo extends Neo4jRepository<E5_Event, String> {
   // @Query("MATCH (n:E5_Event {id: $id}) WITH n MATCH (n)->[:P4_HAS_TIME_SPAN]->(ts:E52_TimeSpan) return n, ts AS timeSpan")
   // Optional<E5_Event> findById(@Param("id") String id);
 
-  @Query("MATCH (n:E5_Event WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
-  List<GetIdAndNameOnly> findContainsName(String name);
-
   @Query("MATCH (event:E5_Event {id: $eventId})-[:P7_TOOK_PLACE_AT]->(:E53_Place {id: $placeId}) RETURN event")
   List<E5_Event> findP7(@Param("eventId") String eventId, @Param("placeId") String placeId);
 

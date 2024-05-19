@@ -1,7 +1,6 @@
 package com.kobkbs.graphsvc.service;
 
 import com.kobkbs.graphsvc.model.E5_Event;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E21_Person_Repo;
 import com.kobkbs.graphsvc.repository.E53_Place_Repo;
 import com.kobkbs.graphsvc.repository.E5_Event_Repo;
@@ -57,12 +56,6 @@ public class E5_Event_SvcImp implements E5_Event_Svc{
   public List<E5_Event> getE5ByTimeSpan(String tsName) {
 
     return eventRepo.findByTimeSpan(tsName);
-  }
-
-  @Override
-  public List<GetIdAndNameOnly> searchE5(String eventName) {
-
-    return eventRepo.findContainsName(eventName);
   }
 
   @Override

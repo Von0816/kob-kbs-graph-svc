@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.kobkbs.graphsvc.dto.E52_TimeSpan_DTO;
 import com.kobkbs.graphsvc.model.E52_TimeSpan;
 import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E52_TimeSpan_Repo;
@@ -35,12 +34,6 @@ public class E52_TimeSpan_SvcImp implements E52_TimeSpan_Svc{
   public Optional<E52_TimeSpan> getE52ById(String timeSpanId) {
 
     return timeSpanRepo.findById(timeSpanId);
-  }
-
-  @Override
-  public List<GetIdAndNameOnly> searchE52(String tsName) {
-
-    return timeSpanRepo.findContainsName(tsName);
   }
 
   @Override

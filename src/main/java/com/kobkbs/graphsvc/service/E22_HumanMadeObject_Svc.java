@@ -3,9 +3,7 @@ package com.kobkbs.graphsvc.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.kobkbs.graphsvc.dto.E22_HumanMadeObject_DTO;
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E22_HumanMadeObject_Svc {
 
@@ -16,8 +14,7 @@ public interface E22_HumanMadeObject_Svc {
   List<E22_HumanMadeObject> getE22ByOwnerPersonName(String ownerPersonName);
   List<E22_HumanMadeObject> getE22ByOwnerGroupName(String ownerGroupName);
   Optional<E22_HumanMadeObject> getE22ById(String hmoId);
-  List<GetIdAndNameOnly> searchE22(String hmoName);
-  void createE22(E22_HumanMadeObject_DTO hmoDTO);
+  void createE22(String name, String type);
   void updateE22Name(String hmoId, String newName);
   void createP54(String hmoId, String placeId);
   void createP55(String hmoId, String placeId);

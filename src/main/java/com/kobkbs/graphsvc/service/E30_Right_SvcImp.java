@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.kobkbs.graphsvc.model.E30_Right;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 import com.kobkbs.graphsvc.repository.E30_Right_Repo;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
@@ -31,12 +30,6 @@ public class E30_Right_SvcImp implements E30_Right_Svc {
   public Optional<E30_Right> getE30ById(String rightId) {
 
     return rightRepo.findById(rightId);
-  }
-
-  @Override
-  public List<GetIdAndNameOnly> searchE30(String rightName) {
-
-    return rightRepo.findContainsName(rightName);
   }
 
   @Override

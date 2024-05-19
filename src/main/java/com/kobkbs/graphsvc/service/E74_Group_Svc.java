@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.kobkbs.graphsvc.model.E74_Group;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E74_Group_Svc {
 
   List<E74_Group> getAllE74();
   List<E74_Group> getE74ByMemberName(String memberName);
-  List<GetIdAndNameOnly> searchE74(String groupName);
   Optional<E74_Group> getE74ById(String groupId);
   void createE74(String groupName);
   void createP107(String groupId, String personId);

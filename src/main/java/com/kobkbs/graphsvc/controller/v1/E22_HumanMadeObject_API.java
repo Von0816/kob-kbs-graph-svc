@@ -2,7 +2,6 @@ package com.kobkbs.graphsvc.controller.v1;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
 import com.kobkbs.graphsvc.service.E22_HumanMadeObject_SvcImp;
-import com.kobkbs.graphsvc.dto.E22_HumanMadeObject_DTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -66,9 +65,9 @@ public class E22_HumanMadeObject_API {
   }
 
   @PostMapping
-  public ResponseEntity<String> CreateE22(@RequestBody E22_HumanMadeObject_DTO request) {
+  public ResponseEntity<String> CreateE22(@RequestBody String name, @RequestBody String type) {
 
-    hmoSvc.createE22(request);
+    hmoSvc.createE22(name, type);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }

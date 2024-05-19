@@ -20,3 +20,5 @@ logging:
     org:
       springframework:
         security: DEBUG
+        data:
+          neo4j: DEBUG

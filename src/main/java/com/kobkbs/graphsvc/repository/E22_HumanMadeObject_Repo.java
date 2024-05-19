@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kobkbs.graphsvc.model.E22_HumanMadeObject;
-import com.kobkbs.graphsvc.projection.GetIdAndNameOnly;
 
 public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeObject, String> {
   List<E22_HumanMadeObject> findByType(String type);
@@ -20,18 +20,19 @@ public interface E22_HumanMadeObject_Repo extends Neo4jRepository<E22_HumanMadeO
   // @Query("MATCH (n:E22_HumanMadeObject {id: $id}) RETURN n")
   // Optional<E22_HumanMadeObject> findById(@Param("id") String id);
 
-  @Query("MATCH (n:E22_HumanMadeObject WHERE toLower(n.name) CONTAINS toLower($name)) RETURN {id: n.id, name: n.name}")
-  List<GetIdAndNameOnly> findContainsName(String name);
-
+  @Transactional(readOnly = true)
   @Query("MATCH (hmo:E22_HumanMadeObject {id: $hmoId})-[:P54_HAS_CURRENT_PERMANENT_LOCATION]->(:E53_Place {id: $placeId}) RETURN hmo")
   List<E22_HumanMadeObject> findP54(@Param("hmoId") String hmoId, @Param("placeId") String placeId);
 
+  @Transactional(readOnly = true)
   @Query("MATCH (hmo:E22_HumanMadeObject {id: $hmoId})-[:P55_HAS_CURRENT_LOCATION]->(:E53_Place {id: $placeId}) RETURN hmo")
   List<E22_HumanMadeObject> findP55(@Param("hmoId") String hmoId, @Param("placeId") String placeId);
 
+  @Transactional(readOnly = true)
   @Query("MATCH (hmo:E22_HumanMadeObject {id: $hmoId})-[:P51_HAS_CURRENT_OR_FORMER_OWNER]->(:E21_Person {id: $personId}) RETURN hmo")
   List<E22_HumanMadeObject> findP51P(@Param("hmoId") String hmoId, @Param("personId") String personId);
 
+  @Transactional(readOnly = true)
   @Query("MATCH (hmo:E22_HumanMadeObject {id: $hmoId})-[:P51_HAS_CURRENT_OR_FORMER_OWNER]->(:E74_Group {id: $groupId}) RETURN hmo")
   List<E22_HumanMadeObject> findP51G(@Param("hmoId") String hmoId, @Param("groupId") String groupId);
 
