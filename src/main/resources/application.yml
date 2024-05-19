@@ -15,3 +15,8 @@ spring:
 springdoc:
   api-docs:
     path: /api
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
